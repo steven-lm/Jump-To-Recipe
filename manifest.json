@@ -1,0 +1,42 @@
+{
+  "name": "OnlyRecipe",
+  "description": "Pulls the recipe.",
+  "homepage_url": "https://github.com/llagerlof/fresh-chrome-extension",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "action": {
+    "default_title": "OnlyRecipe",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "run_at" : "document_start",
+      "js": ["before.js"],
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ]
+    },
+    {
+      "run_at" : "document_idle",
+      "js": ["after.js"],
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*",
+    "https://onlyrecipe.herokuapp.com/*"
+  ],
+  "icons": { "16": "/icons/icon16.png", "48": "/icons/icon128.png", "128": "/icons/icon128.png" }
+}
