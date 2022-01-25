@@ -1,7 +1,5 @@
-
 <!-- 
     TODO.
-
     - Import styles.css and script.js
     - Add a "close" button to the popup. When user clicks on it, hide the popup. Hint: Display: none;
     - If you click outside modal, close the popup
@@ -12,22 +10,50 @@
     - Import svgs from /images/ and change the colour of the icons to match Figma
     - test with very long ingriendts and direction
     - Learn how to open Pull request with code changes
-
  -->
 
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap"
+    rel="stylesheet"
+  />
 </head>
-<div id='only-recipe-background'></div>
-<div id='only-recipe-wrapper'>
-    <div id='only-recipe-container'>
-        cherro big cute
+<body>
+  <div id="only-recipe-background"></div>
+  <div id="only-recipe-container">
+    <div id="only-recipe-top">
+      <div id="only-recipe-top-image-container">
+        <img
+          id="only-recipe-top-image"
+          src="images/placeholder-image.png"
+          alt="placeholder"
+        />
+      </div>
+      <div id="only-recipe-top-content-container">
+        <div id="only-recipe-top-title">Cuto Stevo</div>
+        <div id="only-recipe-top-description">
+          <div class="only-recipe-top-meta">
+            <img src="images/time.svg" />
+            <span>1 hour</span>
+          </div>
+          <div class="only-recipe-top-meta">
+            <img src="images/servings.svg" />
+            <span>2 servings</span>
+          </div>
+        </div>
+        <button id="only-recipe-save-button"> Save </button>
+      </div>
+      <span id="only-recipe-close-button">&times;</span>
     </div>
-</div>
+    
+    <div id="only-recipe-bottom">cherro big cute bottom</div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
