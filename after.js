@@ -72,19 +72,24 @@
       // directions
       const directionsContainer = document.getElementById('only-recipe-bottom-instructions-content')
       for (let i = 0; i < data.instructions.length; i++) {
-        // direction
-        const dir = document.createElement('div')
-        dir.className = "only-recipe-direction-item"
-        dir.textContent = data.instructions[i];
+        // container
+        const step = document.createElement('div')
+        step.className = "only-recipe-instructions-container"
+        
+        // instructions
+        const instr = document.createElement('div')
+        instr.className = "only-recipe-instructions-item"
+        instr.textContent = data.instructions[i];
 
         // number
-        var num = document.createElement('span')
-        num.innerHTML = i;
-        num.className = "only-recipe-direction-number"
+        const num = document.createElement('span')
+        num.className = "only-recipe-instructions-number"
+        num.innerHTML = i + 1;
         
-        directionsContainer.appendChild(num);
-        directionsContainer.appendChild(dir);
-        
+        step.appendChild(num);
+        step.appendChild(instr);
+
+        directionsContainer.appendChild(step);
       }
 
       // image

@@ -222,12 +222,20 @@
     padding-bottom: 50px;
 }
 
-.only-recipe-direction-item {
+.only-recipe-instructions-container {
     font-size: 18px;
-    color: #818181;
     padding-bottom: 25px;
     display: flex;
-    flex-direction: row;
+}
+
+.only-recipe-instructions-item {
+    color: #818181;
+}
+
+.only-recipe-instructions-number {
+    color: #FFA133;
+    font-weight: bold;
+    padding-right: 15px;
 }
 
 
