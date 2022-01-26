@@ -5,7 +5,7 @@
   const page_url = window.location.href;
   console.log("page url", page_url);
 
-  var url = "https://onlyrecipe.herokuapp.com/?url=https://www.dontgobaconmyheart.co.uk/cowboy-burgers/";
+  var url = "https://onlyrecipe.herokuapp.com/?url=" + page_url;
 
   async function getData(url) {
     // Default options are marked with *

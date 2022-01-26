@@ -59,7 +59,7 @@
 #only-recipe-top-title {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 32px;
     color: #535353;
 }
 
@@ -78,7 +78,7 @@
     color: #989898;
     height: 100%;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 16px;
 }
 
 
@@ -102,7 +102,7 @@
     height: 35px;
     background: #FFA133;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 16px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -178,7 +178,7 @@
 #only-recipe-bottom-ingredients-title {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    font-size: 1.7rem;
+    font-size: 27px;
     color: #535353;
     margin-bottom: 10px;
 }
@@ -192,7 +192,7 @@
 #only-recipe-bottom-instructions-title {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    font-size: 1.7rem;
+    font-size: 27px;
     color: #535353;
     margin-bottom: 10px;
 }
@@ -208,14 +208,14 @@
 }
 
 .only-recipe-ingredient-item-underlined {
-    font-size: 1.1rem;
+    font-size: 18px;
     padding: 10px 0px;
     border-bottom: 1px solid #E1E1E1;
     width: 250px;
 }
 
 .only-recipe-ingredient-item {
-    font-size: 1.1rem;
+    font-size: 18px;
     padding: 10px 0px;
     padding-bottom: 50px;
 }
