@@ -1,11 +1,11 @@
 {
-  "name": "OnlyRecipe",
-  "description": "Pulls the recipe.",
+  "name": "Jump To Recipe",
+  "description": "Extracts only the recipe from any recipe page, without any life stories or clutter.",
   "homepage_url": "https://github.com/llagerlof/fresh-chrome-extension",
   "version": "1.0.0",
   "manifest_version": 3,
   "action": {
-    "default_title": "OnlyRecipe"
+    "default_title": "Jump To Recipe"
   },
   "content_scripts": [
     {
@@ -52,7 +52,8 @@
         "http://*/*", "https://*/*"
       ],
       "resources": [
-        "popup.html"
+        "popup.html",
+        "/images/*"
       ]
     }
   ]

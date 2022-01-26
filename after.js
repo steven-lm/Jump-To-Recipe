@@ -32,8 +32,46 @@
     .then(data => {
       console.log(data); // JSON data parsed by `data.json()` call
 
-      const shid = document.getElementById('only-recipe-container')
-      shid.textContent = data.title;
+      const title = document.getElementById('only-recipe-top-title')
+      title.textContent = data.title;
+
+      const time = document.getElementById('only-recipe-time')
+
+      console.log("TIME,", data.total_time.hours);
+
+      if (data.total_time.hours > 0) {
+        time.textContent = data.title;
+        time.textContent = data.total_time.hours + " hours " + data.total_time.minutes + " minutes";
+      } else if (data.total_time.minutes > 0) {
+        time.textContent = data.total_time.minutes + " minutes";
+      }
+
+      const servings = document.getElementById('only-recipe-servings')
+      servings.textContent = data.yields;
+
+      const image = document.getElementById('only-recipe-top-image')
+      image.src = data.image;
+
+      const ingredientsContainer = document.getElementById('only-recipe-bottom-ingredients-content')
+
+      for (let i = 0; i < data.ingredients.length - 1; i++) {
+        const ingredient = document.createElement('div')
+        ingredient.className = "only-recipe-ingredient-item-underlined"
+        ingredient.textContent = data.ingredients[i];
+        ingredientsContainer.appendChild(ingredient);
+      }
+
+      const ingredient = document.createElement('div')
+      ingredient.className = "only-recipe-ingredient-item"
+      ingredient.textContent = data.ingredients[data.ingredients.length - 1];
+      ingredientsContainer.appendChild(ingredient);
+
+
+      // image
+      // ingredients (array)
+      // instructions (array)
+      // total time {hours, minutes}
+      //yields
     });
 
 
