@@ -52,6 +52,8 @@
       const image = document.getElementById('only-recipe-top-image')
       image.src = data.image;
 
+
+      // ingredients
       const ingredientsContainer = document.getElementById('only-recipe-bottom-ingredients-content')
 
       for (let i = 0; i < data.ingredients.length - 1; i++) {
@@ -66,6 +68,24 @@
       ingredient.textContent = data.ingredients[data.ingredients.length - 1];
       ingredientsContainer.appendChild(ingredient);
 
+
+      // directions
+      const directionsContainer = document.getElementById('only-recipe-bottom-instructions-content')
+      for (let i = 0; i < data.instructions.length; i++) {
+        // direction
+        const dir = document.createElement('div')
+        dir.className = "only-recipe-direction-item"
+        dir.textContent = data.instructions[i];
+
+        // number
+        var num = document.createElement('span')
+        num.innerHTML = i;
+        num.className = "only-recipe-direction-number"
+        
+        directionsContainer.appendChild(num);
+        directionsContainer.appendChild(dir);
+        
+      }
 
       // image
       // ingredients (array)

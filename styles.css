@@ -145,10 +145,12 @@
 }
 
 #only-recipe-close-button {
+    position: absolute;
     color: #aaa;
     float: right;
-    font-size: 50px;
-    font-weight: bold;
+    font-size: 40px;
+    top: 5px;
+    right: 18px;
   }
   
 #only-recipe-close-button:hover,
@@ -218,6 +220,14 @@
     font-size: 18px;
     padding: 10px 0px;
     padding-bottom: 50px;
+}
+
+.only-recipe-direction-item {
+    font-size: 18px;
+    color: #818181;
+    padding-bottom: 25px;
+    display: flex;
+    flex-direction: row;
 }
 
 
