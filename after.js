@@ -33,23 +33,31 @@
   
   getData(url)
     .then(data => {
-      console.log(data); // JSON data parsed by `data.json()` call
-
+      
+      // title
       const title = document.getElementById('only-recipe-top-title')
       title.textContent = data.title;
 
+      // time
       const time = document.getElementById('only-recipe-time')
 
-      console.log("TIME,", data.total_time.hours);
+      let hourLabel = "hours";
+      let minLabel = "minutes";
 
-      if (data.total_time.hours > 0) {
-        time.textContent = data.title;
-        time.textContent = data.total_time.hours + " hours " + data.total_time.minutes + " minutes";
+      if (data.total_time.hours == 1) hourLabel = "hour";
+      if (data.total_time.minutes == 1) minLabel = "minute";
+
+      if (data.total_time.hours > 0 && data.total_time.minutes > 0) {
+        time.textContent = data.total_time.hours + " " + hourLabel + "  " + data.total_time.minutes + " " + minLabel;
+      } else if (data.total_time.hours > 0 && data.total_time.minutes == 0) {
+        time.textContent = data.total_time.hours + " " + hourLabel;
       } else if (data.total_time.minutes > 0) {
-        time.textContent = data.total_time.minutes + " minutes";
+        time.textContent = data.total_time.minutes + " " + minLabel;
       }
 
+      // servings
       const servings = document.getElementById('only-recipe-servings')
+      if (data.yields == "0 serving(s)") data.yields = "-- serving(s)";   // if no servings, show --
       servings.textContent = data.yields;
 
       const image = document.getElementById('only-recipe-top-image')
