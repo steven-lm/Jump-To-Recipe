@@ -20,6 +20,10 @@
       },
     })
     .then((response) => {
+      // if (Object.keys(response).length === 0) {
+      //   console.log("NO DATA");
+      //   document.getElementById("only-recipe-container").innerHTML = "";
+      // };
       return response
     })
     .catch(err => console.log(err));
@@ -27,14 +31,11 @@
     console.log("HERE", response);
     return response.json(); 
   }
-
-
-
   
   getData(url)
     .then(data => {
-      
-      // title
+
+	    // title
       const title = document.getElementById('only-recipe-top-title')
       title.textContent = data.title;
 
@@ -48,11 +49,11 @@
       if (data.total_time.minutes == 1) minLabel = "minute";
 
       if (data.total_time.hours > 0 && data.total_time.minutes > 0) {
-        time.textContent = data.total_time.hours + " " + hourLabel + "  " + data.total_time.minutes + " " + minLabel;
+        time.textContent = data.total_time.hours + " " + hourLabel + "  " + Math.round(data.total_time.minutes) + " " + minLabel;
       } else if (data.total_time.hours > 0 && data.total_time.minutes == 0) {
         time.textContent = data.total_time.hours + " " + hourLabel;
       } else if (data.total_time.minutes > 0) {
-        time.textContent = data.total_time.minutes + " " + minLabel;
+        time.textContent = Math.round(data.total_time.minutes) + " " + minLabel;
       }
 
       // servings

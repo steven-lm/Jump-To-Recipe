@@ -271,3 +271,20 @@ background: #555;
     }
     
 }
+
+#only-recipe-not-found-container {
+    width: fit-content;
+    height: fit-content;
+    overflow: auto;
+    min-height: 700px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 10px;
+    top: 50%;
+    z-index: 2147483647;
+    padding: 25px;
+    position: fixed;
+    flex-direction: column;
+    font-family: 'Lato', sans-serif;
+}
