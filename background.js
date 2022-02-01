@@ -1,3 +1,4 @@
+
 chrome.action.onClicked.addListener(execScript);
 
 async function execScript() {
