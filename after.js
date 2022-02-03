@@ -20,10 +20,6 @@
       },
     })
     .then((response) => {
-      // if (Object.keys(response).length === 0) {
-      //   console.log("NO DATA");
-      //   document.getElementById("only-recipe-container").innerHTML = "";
-      // };
       return response
     })
     .catch(err => console.log(err));
@@ -34,7 +30,6 @@
   
   getData(url)
     .then(data => {
-
 	    // title
       const title = document.getElementById('only-recipe-top-title')
       title.textContent = data.title;
@@ -109,6 +104,19 @@
       // instructions (array)
       // total time {hours, minutes}
       //yields
+    }).catch(err => {
+      const container = document.getElementById("only-recipe-container")
+      container.id = "only-recipe-container-error";
+
+      const top = document.getElementById("only-recipe-top")
+      const bottom = document.getElementById("only-recipe-bottom")
+
+      top.innerHTML = "No Recipe Found :(";
+      top.style.justifyContent = "center";
+      top.style.alignItems = "center";
+      bottom.innerHTML = "";
+
+      console.log("errorrr")
     });
 
 

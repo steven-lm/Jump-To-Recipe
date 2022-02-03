@@ -28,6 +28,30 @@
     font-family: 'Lato', sans-serif;
 }
 
+#only-recipe-container-error {
+    border-radius: 10px;
+    width: 80%;
+    max-width: 900px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Lato', sans-serif;
+    top: 50%;
+    z-index: 2147483647;
+    padding: 25px;
+    position: fixed;
+    height: 300px;
+    flex-direction: column;
+    min-height: 300px;
+    color: rgb(187, 0, 0);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    font-weight: bold;
+    font-size: 24px;
+
+}
+
 #only-recipe-top {
     height: 220px;
     width: 100%;

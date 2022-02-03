@@ -3,7 +3,11 @@
   console.log("EXECUTE JS")
   
   const background = document.getElementById("only-recipe-background");
-  const container = document.getElementById("only-recipe-container");
+  let container = document.getElementById("only-recipe-container");
+
+  if (!container) {
+    container = document.getElementById("only-recipe-container-error");
+  }
 
   background.style.display = "block";
   container.style.display = "block";
