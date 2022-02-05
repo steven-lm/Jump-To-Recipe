@@ -1,2 +1,2 @@
-# Only-Recipe
+# Jump-To-Recipe
 Chrome extension
