@@ -1,0 +1,46 @@
+body {
+    font-family: 'Lato', sans-serif;
+    color: rgb(83, 83, 83);
+    font-size: 16px;
+}
+
+.container {
+    width: 300px;
+    height: 100px;
+}
+
+.saved-heading {
+    font-size: 1.2rem;
+}
+
+.saved-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.saved-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.saved-item a {
+    text-decoration: none;
+}
+
+.saved-item-delete {
+    cursor: pointer;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    background: #d81f1f;
+    align-items: center;
+}
+
+.saved-item-delete svg {
+    height: 14px;
+    width: 14px;
+    margin-right: 5px;
+}
