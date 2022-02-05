@@ -6,22 +6,31 @@ body {
 
 .container {
     width: 300px;
+    padding: 0px 10px;
     height: 100px;
 }
 
 .saved-heading {
+    padding-right: 10px;
+    padding-bottom: 3px;
+    margin-bottom: 10px;
+    width: fit-content;
     font-size: 1.2rem;
+    border-bottom: 1px solid rgb(218, 218, 218);
 }
 
 .saved-container {
     width: 100%;
     display: flex;
     flex-direction: column;
+    padding-bottom: 20px;
 }
 
 .saved-item {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    margin: 10px 0px;
 }
 
 .saved-item a {
@@ -29,8 +38,9 @@ body {
 }
 
 .saved-item-delete {
+    font-size: 0.8rem;
     cursor: pointer;
-    padding: 5px 10px;
+    padding: 3px 10px;
     color: white;
     border-radius: 5px;
     display: flex;
@@ -40,7 +50,15 @@ body {
 }
 
 .saved-item-delete svg {
-    height: 14px;
-    width: 14px;
+    height: 10px;
+    width: 10px;
     margin-right: 5px;
+}
+
+.saved-not-exist {
+    display: none;
+}
+
+.hidden {
+    display: none;
 }

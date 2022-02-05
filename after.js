@@ -2,6 +2,10 @@
 (function() {
   console.log('after.js executed');
 
+  // chrome.storage.sync.set({jumptorecipe_saved: {}}, function() {
+  //   console.log('Value is set to ' + value);
+  // });
+
   const page_url = window.location.href;
   console.log("page url", page_url);
 

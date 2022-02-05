@@ -118,7 +118,7 @@
     margin-left: -10px;
 }
 
-#only-recipe-share-button {
+#only-recipe-save-button {
     color: white;
     font-family: 'Montserrat', sans-serif;
     width: 100%;
@@ -132,6 +132,22 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+}
+
+#only-recipe-save-button-saved {
+    color: rgb(175, 175, 175);
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    border: none;
+    height: 35px;
+    background: #dbdbdb;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
 }
 
 #only-recipe-saved-container {
