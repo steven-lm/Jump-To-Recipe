@@ -15,7 +15,7 @@ function addToSaved(title, url) {
         let current = result.jumptorecipe_saved;
         console.log("current", current)
 
-        if (!current || Object.keys(current).length === 0) {
+        if (!current || current.length === 0) {
             console.log("current NOT exists")
             const newItem = {
                 title: title,
@@ -23,12 +23,11 @@ function addToSaved(title, url) {
             }
 
             const newList = [newItem]
-            chrome.storage.sync.set({'jumptorecipe_saved': JSON.stringify(newList)}, function() {
+            chrome.storage.sync.set({'jumptorecipe_saved': newList}, function() {
                 console.log('Value is set to ' + value);
             });
 
         } else {
-            current =  JSON.parse(result.jumptorecipe_saved);
             console.log("current exists")
             const newItem = {
                 title: title,
@@ -36,7 +35,7 @@ function addToSaved(title, url) {
             }
 
             current.push(newItem)
-            chrome.storage.sync.set({jumptorecipe_saved: JSON.stringify(current)}, function() {
+            chrome.storage.sync.set({jumptorecipe_saved: current}, function() {
                 console.log('Value is set to ' + value);
             });
         }
@@ -68,15 +67,14 @@ fetch(chrome.runtime.getURL('/popup.html')).then(r => r.text()).then(html => {
         let current = result.jumptorecipe_saved;
         console.log( current);
       
-        if (!current || Object.keys(current).length === 0) {
+        if (!current || current.length === 0) {
           return
         } else {
-          current = JSON.parse(result.jumptorecipe_saved);
           console.log("current exists");
       
           for (const item of current) {
             if(item.url === page_url) {
-                saveButton.textContent = "Saved";
+                saveButton.textContent = "Saved!";
                 saveButton.id = "only-recipe-save-button-saved";
                 saveContainer.onclick = null;
 

@@ -1,8 +1,8 @@
 // this code will be executed after page load
 (function() {
   console.log('after.js executed');
-
-  // chrome.storage.sync.set({jumptorecipe_saved: {}}, function() {
+  console.log("resetting")
+  // chrome.storage.sync.set({jumptorecipe_saved: []}, function() {
   //   console.log('Value is set to ' + value);
   // });
 
@@ -119,6 +119,25 @@
       top.style.justifyContent = "center";
       top.style.alignItems = "center";
       bottom.innerHTML = "";
+
+      chrome.storage.local.get(['jumptorecipe_norecipe'], function(result) {
+        let current = result.jumptorecipe_norecipe;  
+        if (!current || current.length === 0) {
+            console.log("current NOT exists")
+            const newList = [page_url]
+            chrome.storage.local.set({'jumptorecipe_norecipe': newList}, function() {
+                console.log('Value is set to ' + value);
+            });
+  
+        } else {
+            console.log("current exists")
+  
+            current.push(page_url)
+            chrome.storage.local.set({'jumptorecipe_norecipe': current}, function() {
+                console.log('Value is set to ' + value);
+            });
+        }
+    });
 
       console.log("errorrr")
     });

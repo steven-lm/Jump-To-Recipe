@@ -10,9 +10,28 @@ function hello() {
 
 document.getElementById("clickme").addEventListener("click", hello);
 
+chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+  var activeTab = tabs[0];
+  console.log("CURRENT FRICKIN TAB", activeTab.url)
+
+  chrome.storage.local.get(["jumptorecipe_norecipe"], function (result) {
+    let norecipe_urls = result.jumptorecipe_norecipe;
+    for (const url of norecipe_urls) {
+      // console.log("url", url);
+      // console.log("ACTIVE TAB", activeTab.url);
+      if (url === activeTab.url) {
+        // console.log("SITE NOT FRICKIN SUPORTWED")
+        document.getElementById("no-recipe").classList.remove("hidden");
+  
+      }
+    }
+  });
+});
 
 const savedNotExist = document.getElementsByClassName("saved-not-exist")[0];
 const savedContainer = document.getElementsByClassName("saved-container")[0];
+
+const binSvg = document.getElementById("bin_svg");
 
 
 chrome.storage.sync.get(["jumptorecipe_saved"], function (result) {
@@ -20,31 +39,75 @@ chrome.storage.sync.get(["jumptorecipe_saved"], function (result) {
   let current = result.jumptorecipe_saved;
   console.log( current);
 
-  if (!current || Object.keys(current).length === 0) {
+  function deleteSavedItem(title, url, element) {
+    console.log("fetus deletus")
+
+    let newSavedItems = current;
+
+    for (const item of newSavedItems) {
+      if (item.title === title && item.url === url) {
+        newSavedItems.splice(newSavedItems.indexOf(item), 1);
+
+        chrome.storage.sync.set({'jumptorecipe_saved': newSavedItems}, function() {
+          console.log('Updated saved recipes');
+      });
+      }
+    }
+
+    element.remove()
+
+    if (newSavedItems.length == 0) {
+      savedNotExist.style.display = "block";
+      savedContainer.style.display = "none";
+    }
+
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      var activeTab = tabs[0];
+      chrome.tabs.sendMessage(activeTab.id, { command: "savedItemRemoved", url: url });
+    });
+  }
+  
+
+
+  if (!current || current.length === 0) {
     console.log("current NOT exists");
     savedNotExist.style.display = "block";
     savedContainer.style.display = "none";
   } else {
-    current = JSON.parse(result.jumptorecipe_saved);
+    current = result.jumptorecipe_saved;
     console.log("current exists");
 
     for (const item of current) {
       const newItem = document.createElement("div");
       newItem.classList.add("saved-item");
 
-      newItem.innerHTML = `          
-      <a href="${item.url}" class="saved-item-link" target="_blank">
-        ${item.title}
-      </a>
-      <div class="saved-item-delete">
-        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="white" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
-        <span>Delete</span>
-      </div>
-      `;
+      const link = document.createElement("a");
+      link.href = item.url;
+      link.textContent = item.title;
+      link.target = "_blank";
+      link.classList.add("saved-item-link");
 
+      const deleteButton = document.createElement("div");
+      deleteButton.classList.add("saved-item-delete");
+
+      const svgClone = binSvg.cloneNode(true);
+      svgClone.classList.remove("hidden")
+      deleteButton.appendChild(svgClone);
+
+      const deleteText = document.createElement("span")
+      deleteText.textContent = "Delete";
+      deleteButton.appendChild(deleteText);
+
+      deleteButton.onclick = function() {
+        deleteSavedItem(item.title, item.url, newItem);
+      } 
+
+      newItem.appendChild(link);
+      newItem.appendChild(deleteButton);
       savedContainer.appendChild(newItem);
 
       console.log(item);
     }
   }
   });
+
