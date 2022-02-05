@@ -1,9 +1,9 @@
 function hello() {
-    chrome.scripting.executeScript(
-        {
-          files: ['alert.js'],
-        },
-        () => { console.log("donezo") });
+  console.log("Sending")
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    var activeTab = tabs[0];
+    chrome.tabs.sendMessage(activeTab.id, {"command": "openModal"});
+  });
 }
   
 document.getElementById('clickme').addEventListener('click', hello);
