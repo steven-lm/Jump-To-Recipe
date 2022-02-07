@@ -1,0 +1,19 @@
+{
+  "name": "Jump-To-Recipe",
+  "version": "1.0.0",
+  "description": "Chrome extension",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steven-lm/Jump-To-Recipe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/steven-lm/Jump-To-Recipe/issues"
+  },
+  "homepage": "https://github.com/steven-lm/Jump-To-Recipe#readme"
+}
