@@ -6,7 +6,8 @@ function addToSaved(title, url) {
         if (!current || current.length === 0) {
             const newItem = {
                 title: title,
-                url: url
+                url: url,
+                imgSrc: imgSrc
             }
 
             const newList = [newItem]
@@ -15,7 +16,8 @@ function addToSaved(title, url) {
         } else {
             const newItem = {
                 title: title,
-                url: url
+                url: url,
+                imgSrc: imgSrc
             }
 
             current.push(newItem)
@@ -36,7 +38,7 @@ fetch(chrome.runtime.getURL('/popup.html')).then(r => r.text()).then(html => {
         console.log("SHARED BUTTON AJSLF")
         saveButton.id = "jump-to-recipe-save-button-saved";
         saveButton.textContent = "Saved!";
-        addToSaved(title.textContent, page_url);
+        addToSaved(title.textContent, page_url, imgSrc);
         saveContainer.onclick = null;
     }
 

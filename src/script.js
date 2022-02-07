@@ -1,8 +1,4 @@
-
-
-(function() {
-
-  console.log("SCRIPT JS LOADED")
+console.log("SCRIPT JS LOADED")
 // get modal elements
 var modalBackground = document.getElementById("only-recipe-background");
 var modalBox = document.getElementById("only-recipe-container");
@@ -27,5 +23,3 @@ window.addEventListener("click", function(event) {
     modalBox.style.display = "none";
   }
 });
-
-})
