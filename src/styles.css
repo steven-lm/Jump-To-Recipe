@@ -1,0 +1,340 @@
+#jump-to-recipe-background {
+    background-color: rgba(0, 0, 0, 0.377);
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2147483646;
+    display: none;
+}
+
+#jump-to-recipe-container {
+    width: 80%;
+    max-width: 900px;
+    height: 300px;
+    overflow: auto;
+    min-height: 700px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 10px;
+    top: 50%;
+    z-index: 2147483647;
+    padding: 25px;
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    font-weight: 400;
+    font-family: 'Lato', sans-serif;
+}
+
+#jump-to-recipe-container-error {
+    border-radius: 10px;
+    width: 80%;
+    max-width: 900px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Lato', sans-serif;
+    top: 50%;
+    z-index: 2147483647;
+    padding: 25px;
+    position: fixed;
+    height: 300px;
+    flex-direction: column;
+    min-height: 300px;
+    color: rgb(187, 0, 0);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    font-weight: bold;
+    font-size: 24px;
+
+}
+
+#jump-to-recipe-top {
+    height: 220px;
+    width: 100%;
+    display: flex;
+}
+
+#jump-to-recipe-top-image-container {
+    width: 250px;
+    margin: 25px;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#jump-to-recipe-top-content-container {
+    width: 60%;
+    height: 100%;
+    padding: 0px 20px;
+    margin: 25px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#jump-to-recipe-top-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 32px;
+    color: #535353;
+}
+
+#jump-to-recipe-top-description {
+    display: flex;
+    width: 100%;
+    margin: 20px 0px;
+    align-items: center;
+}
+
+.jump-to-recipe-top-meta {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    color: #989898;
+    height: 100%;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+.jump-to-recipe-top-meta > svg {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.jump-to-recipe-top-meta:first-of-type {
+    margin-left: -10px;
+}
+
+#jump-to-recipe-save-button {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    border: none;
+    height: 35px;
+    background: #FFA133;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+}
+
+#jump-to-recipe-save-button-saved {
+    color: rgb(175, 175, 175);
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    border: none;
+    height: 35px;
+    background: #dbdbdb;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#jump-to-recipe-saved-container {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+#jump-to-recipe-saved-history-button {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+#jump-to-recipe-saved-history-button svg {
+    height: 40px;
+    width: 40px;
+    position: relative;
+    bottom: 3px;
+}
+
+#jump-to-recipe-saved-history-button:hover svg {
+    fill: #db8625;
+}
+
+#jump-to-recipe-save-button:hover {
+    background: #db8625;
+}
+
+#jump-to-recipe-top-image-container img {
+    object-fit: contain;
+    max-width:100%;
+}
+
+#jump-to-recipe-close-button {
+    position: absolute;
+    color: #aaa;
+    float: right;
+    font-size: 40px;
+    top: 5px;
+    right: 18px;
+  }
+  
+#jump-to-recipe-close-button:hover,
+#jump-to-recipe-close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+
+
+#jump-to-recipe-bottom {
+    margin-top: 60px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 50px;
+}
+
+#jump-to-recipe-bottom-ingredients {
+    padding: 0px 25px;
+    height: 100%;
+    width: 250px;
+}
+
+#jump-to-recipe-bottom-ingredients-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 27px;
+    color: #535353;
+    margin-bottom: 10px;
+}
+
+#jump-to-recipe-bottom-instructions {
+    padding: 0px 25px;
+    height: 100%;
+    width: calc(100% - 320px);
+}
+
+#jump-to-recipe-bottom-instructions-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 27px;
+    color: #535353;
+    margin-bottom: 10px;
+}
+
+#jump-to-recipe-bottom-ingredients-content {
+    font-family: 'Lato', sans-serif;
+    color: #818181;
+}
+
+#jump-to-recipe-bottom-instructions-content {
+    font-family: 'Lato', sans-serif;
+    color: #818181;
+}
+
+.jump-to-recipe-ingredient-item-underlined {
+    font-size: 18px;
+    padding: 10px 0px;
+    border-bottom: 1px solid #E1E1E1;
+    width: 250px;
+}
+
+.jump-to-recipe-ingredient-item {
+    font-size: 18px;
+    padding: 10px 0px;
+    padding-bottom: 50px;
+}
+
+.jump-to-recipe-instructions-container {
+    font-size: 18px;
+    padding-bottom: 25px;
+    display: flex;
+}
+
+.jump-to-recipe-instructions-item {
+    color: #818181;
+}
+
+.jump-to-recipe-instructions-number {
+    color: #FFA133;
+    font-weight: bold;
+    padding-right: 15px;
+    width: fit-content;
+    white-space: nowrap;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 50%;
+  }
+  
+/* Track */
+::-webkit-scrollbar-track {
+background: #ffffff; 
+border-radius: 10px;
+height: 50px;
+margin-top: 10px;
+margin-bottom: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: #888; 
+border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: #555; 
+}
+
+@media only screen and (max-width: 1000px) {
+    #jump-to-recipe-bottom-instructions {
+        width: 52%;
+    }
+    
+}
+
+#jump-to-recipe-not-found-container {
+    width: fit-content;
+    height: fit-content;
+    overflow: auto;
+    min-height: 700px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 10px;
+    top: 50%;
+    z-index: 2147483647;
+    padding: 25px;
+    position: fixed;
+    flex-direction: column;
+    font-family: 'Lato', sans-serif;
+}
+
