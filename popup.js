@@ -83,8 +83,8 @@ chrome.storage.sync.get(["jumptorecipe_saved"], function (result) {
       // image
       var img = document.createElement("img");
       img.src = item.imgSrc;
-      img.setAttribute("width", "70");
-      img.setAttribute("height", "70");
+      img.setAttribute("width", "80");
+      img.setAttribute("height", "80");
       newItem.appendChild(img);
 
       // link
