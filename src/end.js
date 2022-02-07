@@ -1,4 +1,4 @@
-function addToSaved(title, url, imgSrc) {
+function addToSaved(title, url) {
   console.log("Saving Recipe!")
 
   chrome.storage.sync.get(['jumptorecipe_saved'], function(result) {
@@ -10,8 +10,7 @@ function addToSaved(title, url, imgSrc) {
           console.log("current NOT exists")
           const newItem = {
               title: title,
-              url: url,
-              imgSrc: imgSrc
+              url: url
           }
 
           const newList = [newItem]
@@ -23,8 +22,7 @@ function addToSaved(title, url, imgSrc) {
           console.log("current exists")
           const newItem = {
               title: title,
-              url: url,
-              imgSrc: imgSrc
+              url: url
           }
 
           current.push(newItem)
@@ -43,14 +41,8 @@ function addToSaved(title, url, imgSrc) {
     chrome.runtime.onMessage.addListener(function(message, sender) {
       console.log("hey")
       if (message.command == "openModal") {
-<<<<<<< HEAD:src/end.js
         const background = document.getElementById("jump-to-recipe-background");
         let container = document.getElementById("jump-to-recipe-container");
-=======
-        console.log("message received")
-        const background = document.getElementById("only-recipe-background");
-        let container = document.getElementById("only-recipe-container");
->>>>>>> main:end.js
       
         if (!container) {
           container = document.getElementById("jump-to-recipe-container-error");
@@ -82,6 +74,8 @@ function addToSaved(title, url, imgSrc) {
           const saveContainer = document.getElementById("jump-to-recipe-saved-container");
           const saveButton = document.getElementById("jump-to-recipe-save-button-saved");      
           const title = document.getElementById('jump-to-recipe-top-title')
+
+
           saveButton.textContent = "Save";
           saveButton.id = "jump-to-recipe-save-button";
       
@@ -89,7 +83,7 @@ function addToSaved(title, url, imgSrc) {
               console.log("SAVED AGAGAN AJSLF")
               saveButton.id = "jump-to-recipe-save-button-saved";
               saveButton.textContent = "Saved!";
-              addToSaved(title.textContent, page_url, imgSrc);
+              addToSaved(title.textContent, page_url);
               saveContainer.onclick = null;
           }
         }
@@ -97,4 +91,3 @@ function addToSaved(title, url, imgSrc) {
       }
     });
 })();
-  
