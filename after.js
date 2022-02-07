@@ -63,7 +63,6 @@
       const image = document.getElementById('only-recipe-top-image')
       image.src = data.image;
 
-
       // ingredients
       const ingredientsContainer = document.getElementById('only-recipe-bottom-ingredients-content')
 
@@ -93,7 +92,7 @@
         instr.textContent = data.instructions[i];
 
         // number
-        const num = document.createElement('span')
+        const num = document.createElement('div')
         num.className = "only-recipe-instructions-number"
         num.innerHTML = i + 1;
         
@@ -101,6 +100,14 @@
         step.appendChild(instr);
 
         directionsContainer.appendChild(step);
+        console.log("when does this happen")
+        
+        // open recipe modal automatically
+        const background = document.getElementById("only-recipe-background");
+        let container = document.getElementById("only-recipe-container");
+      
+        background.style.display = "block";
+        container.style.display = "block";
       }
 
       // image
@@ -109,17 +116,7 @@
       // total time {hours, minutes}
       //yields
     }).catch(err => {
-      const container = document.getElementById("only-recipe-container")
-      container.id = "only-recipe-container-error";
-
-      const top = document.getElementById("only-recipe-top")
-      const bottom = document.getElementById("only-recipe-bottom")
-
-      top.innerHTML = "No Recipe Found :(";
-      top.style.justifyContent = "center";
-      top.style.alignItems = "center";
-      bottom.innerHTML = "";
-
+      console.log("why in error???");
       chrome.storage.local.get(['jumptorecipe_norecipe'], function(result) {
         let current = result.jumptorecipe_norecipe;  
         if (!current || current.length === 0) {
@@ -137,10 +134,9 @@
                 console.log('Value is set to ' + value);
             });
         }
-    });
+      });
 
       console.log("errorrr")
     });
-
 
 })();

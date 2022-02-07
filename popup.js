@@ -1,14 +1,12 @@
+// function hello() {
+//   console.log("Sending");
+//   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+//     var activeTab = tabs[0];
+//     chrome.tabs.sendMessage(activeTab.id, { command: "openModal" });
+//   });
+// }
 
-
-function hello() {
-  console.log("Sending");
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    var activeTab = tabs[0];
-    chrome.tabs.sendMessage(activeTab.id, { command: "openModal" });
-  });
-}
-
-document.getElementById("clickme").addEventListener("click", hello);
+// document.getElementById("clickme").addEventListener("click", hello);
 
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
   var activeTab = tabs[0];
@@ -21,7 +19,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       // console.log("ACTIVE TAB", activeTab.url);
       if (url === activeTab.url) {
         // console.log("SITE NOT FRICKIN SUPORTWED")
-        document.getElementById("no-recipe").classList.remove("hidden");
+        document.getElementById("no-recipe-container").classList.remove("hidden");
   
       }
     }
@@ -78,25 +76,31 @@ chrome.storage.sync.get(["jumptorecipe_saved"], function (result) {
     console.log("current exists");
 
     for (const item of current) {
+      // new item container
       const newItem = document.createElement("div");
       newItem.classList.add("saved-item");
 
+      // image
+      var img = document.createElement("img");
+      img.src = item.imgSrc;
+      img.setAttribute("width", "70");
+      img.setAttribute("height", "70");
+      newItem.appendChild(img);
+
+      // link
       const link = document.createElement("a");
       link.href = item.url;
       link.textContent = item.title;
       link.target = "_blank";
       link.classList.add("saved-item-link");
 
+      // delete button
       const deleteButton = document.createElement("div");
       deleteButton.classList.add("saved-item-delete");
 
       const svgClone = binSvg.cloneNode(true);
       svgClone.classList.remove("hidden")
       deleteButton.appendChild(svgClone);
-
-      const deleteText = document.createElement("span")
-      deleteText.textContent = "Delete";
-      deleteButton.appendChild(deleteText);
 
       deleteButton.onclick = function() {
         deleteSavedItem(item.title, item.url, newItem);

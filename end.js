@@ -1,4 +1,4 @@
-function addToSaved(title, url) {
+function addToSaved(title, url, imgSrc) {
   console.log("Saving Recipe!")
 
   chrome.storage.sync.get(['jumptorecipe_saved'], function(result) {
@@ -10,7 +10,8 @@ function addToSaved(title, url) {
           console.log("current NOT exists")
           const newItem = {
               title: title,
-              url: url
+              url: url,
+              imgSrc: imgSrc
           }
 
           const newList = [newItem]
@@ -22,7 +23,8 @@ function addToSaved(title, url) {
           console.log("current exists")
           const newItem = {
               title: title,
-              url: url
+              url: url,
+              imgSrc: imgSrc
           }
 
           current.push(newItem)
@@ -42,6 +44,7 @@ function addToSaved(title, url) {
     chrome.runtime.onMessage.addListener(function(message, sender) {
       console.log("hey")
       if (message.command == "openModal") {
+        console.log("message received")
         const background = document.getElementById("only-recipe-background");
         let container = document.getElementById("only-recipe-container");
       
@@ -75,7 +78,7 @@ function addToSaved(title, url) {
           const saveContainer = document.getElementById("only-recipe-saved-container");
           const saveButton = document.getElementById("only-recipe-save-button-saved");      
           const title = document.getElementById('only-recipe-top-title')
-
+          const imgSrc = document.getElementById('only-recipe-top-image').src
 
           saveButton.textContent = "Save";
           saveButton.id = "only-recipe-save-button";
@@ -84,7 +87,7 @@ function addToSaved(title, url) {
               console.log("SAVED AGAGAN AJSLF")
               saveButton.id = "only-recipe-save-button-saved";
               saveButton.textContent = "Saved!";
-              addToSaved(title.textContent, page_url);
+              addToSaved(title.textContent, page_url, imgSrc);
               saveContainer.onclick = null;
           }
         }

@@ -283,6 +283,8 @@
     color: #FFA133;
     font-weight: bold;
     padding-right: 15px;
+    width: fit-content;
+    white-space: nowrap;
 }
 
 
@@ -335,3 +337,4 @@ background: #555;
     flex-direction: column;
     font-family: 'Lato', sans-serif;
 }
+

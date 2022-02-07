@@ -7,8 +7,8 @@ const body = document.body;
 
 // body.appendChild(cover);
 
-function addToSaved(title, url) {
-    console.log("Saving Recipe!")
+function addToSaved(title, url, imgSrc) {
+    console.log("Saving Recipe! in main")
 
     chrome.storage.sync.get(['jumptorecipe_saved'], function(result) {
         console.log('Value currently is ' + result.jumptorecipe_saved);
@@ -19,7 +19,8 @@ function addToSaved(title, url) {
             console.log("current NOT exists")
             const newItem = {
                 title: title,
-                url: url
+                url: url,
+                imgSrc: imgSrc
             }
 
             const newList = [newItem]
@@ -31,7 +32,8 @@ function addToSaved(title, url) {
             console.log("current exists")
             const newItem = {
                 title: title,
-                url: url
+                url: url,
+                imgSrc: imgSrc
             }
 
             current.push(newItem)
@@ -52,13 +54,16 @@ fetch(chrome.runtime.getURL('/popup.html')).then(r => r.text()).then(html => {
     const saveButton = document.getElementById("only-recipe-save-button");
     const page_url = window.location.href;
 
+    // get data to save
     const title = document.getElementById('only-recipe-top-title')
+    const imgSrc = document.getElementById('only-recipe-top-image').src
+    console.log("image details in main.js", imgSrc)
 
     saveContainer.onclick = function() {
         console.log("SHARED BUTTON AJSLF")
         saveButton.id = "only-recipe-save-button-saved";
         saveButton.textContent = "Saved!";
-        addToSaved(title.textContent, page_url);
+        addToSaved(title.textContent, page_url, imgSrc);
         saveContainer.onclick = null;
     }
 
