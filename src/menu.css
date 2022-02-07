@@ -5,17 +5,18 @@ body {
 }
 
 .container {
-    width: 350px;
+    width: 300px;
     padding: 0px 10px;
-    height: fit-content;
+    height: 100px;
 }
 
 .saved-heading {
-    display: flex;
     padding-right: 10px;
     padding-bottom: 3px;
-    color: rgb(255, 136, 25);
-    font-size: 1.2rem;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    width: fit-content;
+    font-size: 1.1rem;
     border-bottom: 1px solid rgb(218, 218, 218);
 }
 
@@ -30,9 +31,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 10px 0px;
+    margin: 7px 0px;
 }
 
+.saved-item:first-of-type {
+    margin-top: 0px;
+}
 
 .saved-item a {
     text-decoration: none;
@@ -43,13 +47,15 @@ body {
 }
 
 .saved-item-delete {
-    padding-left: 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 3px 10px;
+    color: white;
     border-radius: 5px;
-    background: rgb(255, 136, 25);
-}
-
-.saved-item-delete:hover {
-    background: #5c5c5c;
+    display: flex;
+    justify-content: center;
+    background: #d81f1f;
+    align-items: center;
 }
 
 .saved-item-delete svg {
@@ -60,21 +66,24 @@ body {
 
 .saved-not-exist {
     display: none;
-    padding-bottom: 10px;
+}
+
+#no-recipe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    color: #f06e03;
+    font-weight: normal;
+}
+
+#no-recipe svg {
+    fill: #f06e03;
+    height: 14px;
+    width: 14px;
+    margin: 0px 5px;
 }
 
 .hidden {
-    display: none;
-}
-
-#no-recipe-container {
-    padding-bottom: 20px;
-
-}
-
-#no-recipe-title {
-    color: rgb(255, 136, 25);
-    font-size: 1.2rem;
-    border-bottom: 1px solid rgb(218, 218, 218);
-    padding-bottom: 3px;
+    display: none !important;
 }
