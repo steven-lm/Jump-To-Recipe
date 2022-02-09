@@ -22,7 +22,6 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         console.log("url", url);
         console.log("ACTIVE TAB", activeTab.url);
         if (url === activeTab.url) {
-          // console.log("SITE NOT FRICKIN SUPORTWED")
           document.getElementById("no-recipe").classList.remove("hidden");
     
         }

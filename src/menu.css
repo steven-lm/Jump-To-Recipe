@@ -14,7 +14,7 @@ body {
     display: flex;
     color: rgb(83, 83, 83);
     padding-right: 10px;
-    padding-bottom: 3px;
+    padding-bottom: 10px;
     margin-top: 15px;
     margin-bottom: 10px;
     font-size: 1.1rem;
@@ -61,7 +61,7 @@ body {
 .saved-item-text-time {
     text-overflow: ellipsis;
     font-size: 13px;
-    font-weight: bold;
+    margin-top: 5px;
     color:rgb(143, 143, 143)
 }
 
@@ -87,7 +87,7 @@ body {
 
 .saved-not-exist {
     display: none;
-    padding-bottom: 2px;
+    padding-bottom: 10px;
     font-size: 14px;
 }
 
