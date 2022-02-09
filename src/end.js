@@ -1,4 +1,4 @@
-function addToSaved(title, url) {
+function addToSaved(title, url, imgSrc, timeTaken) {
   console.log("Saving Recipe!")
 
   chrome.storage.sync.get(['jumptorecipe_saved'], function(result) {
@@ -6,25 +6,20 @@ function addToSaved(title, url) {
       let current = result.jumptorecipe_saved;
       console.log("current", current)
 
+      const newItem = {
+        title: title,
+        url: url,
+        imgSrc: imgSrc,
+        time: timeTaken
+      }
+
       if (!current || current.length === 0) {
-          console.log("current NOT exists")
-          const newItem = {
-              title: title,
-              url: url
-          }
-
-          const newList = [newItem]
-          chrome.storage.sync.set({'jumptorecipe_saved': newList}, function() {
-              console.log('Value is set to ' + value);
-          });
-
+        const newList = [newItem]
+        chrome.storage.sync.set({'jumptorecipe_saved': newList}, function() {
+            console.log('Value is set to ' + value);
+        });
       } else {
           console.log("current exists")
-          const newItem = {
-              title: title,
-              url: url
-          }
-
           current.push(newItem)
           chrome.storage.sync.set({jumptorecipe_saved: current}, function() {
               console.log('Value is set to ' + value);
@@ -73,7 +68,9 @@ function addToSaved(title, url) {
         if (message.url === page_url) {
           const saveContainer = document.getElementById("jump-to-recipe-saved-container");
           const saveButton = document.getElementById("jump-to-recipe-save-button-saved");      
-          const title = document.getElementById('jump-to-recipe-top-title')
+          const title = document.getElementById('jump-to-recipe-top-title');
+          const imgSrc = document.getElementById('jump-to-recipe-top-image').src;
+          const timeTaken = document.getElementById('jump-to-recipe-time');
 
 
           saveButton.textContent = "Save";
@@ -83,7 +80,7 @@ function addToSaved(title, url) {
               console.log("SAVED AGAGAN AJSLF")
               saveButton.id = "jump-to-recipe-save-button-saved";
               saveButton.textContent = "Saved!";
-              addToSaved(title.textContent, page_url);
+              addToSaved(title.textContent, page_url, imgSrc, timeTaken.textContent);
               saveContainer.onclick = null;
           }
         }

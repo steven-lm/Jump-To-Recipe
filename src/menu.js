@@ -81,15 +81,37 @@ chrome.storage.sync.get(["jumptorecipe_saved"], function (result) {
     console.log("current exists");
 
     for (const item of current) {
+      // item container
       const newItem = document.createElement("div");
       newItem.classList.add("saved-item");
+      newItem.onclick = function () {
+        window.open(item.url);
+      }
 
-      const link = document.createElement("a");
-      link.href = item.url;
-      link.textContent = item.title;
-      link.target = "_blank";
-      link.classList.add("saved-item-link");
+      // image
+      var img = document.createElement("img");
+      img.classList.add("saved-recipe-image");
+      img.src = item.imgSrc;
 
+      // text container
+      const textContainer = document.createElement("div");
+      textContainer.classList.add("saved-item-text-container");
+
+      // ---- title
+      const title = document.createElement("span");
+      title.textContent = item.title;
+      title.target = "_blank";
+      title.classList.add("saved-item-text-title");
+      textContainer.appendChild(title);
+      // ---- time
+      const timeText = document.createTextNode("Total time: " + item.time);
+      const time = document.createElement("span");
+      time.appendChild(timeText);
+      time.classList.add("saved-item-text-time");
+      textContainer.appendChild(time);
+      
+
+      // delete button
       const deleteButton = document.createElement("div");
       deleteButton.classList.add("saved-item-delete");
 
@@ -98,14 +120,16 @@ chrome.storage.sync.get(["jumptorecipe_saved"], function (result) {
       deleteButton.appendChild(svgClone);
 
       const deleteText = document.createElement("span")
-      deleteText.textContent = "Delete";
       deleteButton.appendChild(deleteText);
 
-      deleteButton.onclick = function() {
+      deleteButton.addEventListener('click', (event) => {
+        event.stopPropagation();
         deleteSavedItem(item.title, item.url, newItem);
-      } 
-
-      newItem.appendChild(link);
+      });
+      
+      // add all to item container
+      newItem.appendChild(img);
+      newItem.appendChild(textContainer);
       newItem.appendChild(deleteButton);
       savedContainer.appendChild(newItem);
 
