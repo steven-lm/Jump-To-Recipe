@@ -1,26 +1,12 @@
 
-
-// function openModal() {
-//   console.log("Sending");
-//   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-//     var activeTab = tabs[0];
-//     chrome.tabs.sendMessage(activeTab.id, { command: "openModal" });
-//   });
-// }
-
-// document.getElementById("clickme").addEventListener("click", openModal);
-
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
   var activeTab = tabs[0];
   chrome.storage.local.get(["jumptorecipe_norecipe"], function (result) {
     let norecipe_urls = result.jumptorecipe_norecipe;
 
     if (norecipe_urls && norecipe_urls.length > 0) {
-      console.log("norecipe_urls", norecipe_urls);
 
       for (const url of norecipe_urls) {
-        console.log("url", url);
-        console.log("ACTIVE TAB", activeTab.url);
         if (url === activeTab.url) {
           document.getElementById("no-recipe").classList.remove("hidden");
     
@@ -37,12 +23,9 @@ const binSvg = document.getElementById("bin_svg");
 
 
 chrome.storage.sync.get(["jumptorecipe_saved"], function (result) {
-  console.log("Value currently is " + result.jumptorecipe_saved);
   let current = result.jumptorecipe_saved;
-  console.log( current);
 
   function deleteSavedItem(title, url, element) {
-    console.log("fetus deletus")
 
     let newSavedItems = current;
 
@@ -50,9 +33,7 @@ chrome.storage.sync.get(["jumptorecipe_saved"], function (result) {
       if (item.title === title && item.url === url) {
         newSavedItems.splice(newSavedItems.indexOf(item), 1);
 
-        chrome.storage.sync.set({'jumptorecipe_saved': newSavedItems}, function() {
-          console.log('Updated saved recipes');
-      });
+        chrome.storage.sync.set({'jumptorecipe_saved': newSavedItems});
       }
     }
 
@@ -72,13 +53,10 @@ chrome.storage.sync.get(["jumptorecipe_saved"], function (result) {
 
 
   if (!current || current.length === 0) {
-    console.log("current NOT exists");
     savedNotExist.style.display = "block";
     savedContainer.style.display = "none";
   } else {
     current = result.jumptorecipe_saved;
-    console.log("current exists");
-
     for (const item of current) {
       // item container
       const newItem = document.createElement("div");
@@ -87,10 +65,15 @@ chrome.storage.sync.get(["jumptorecipe_saved"], function (result) {
         window.open(item.url);
       }
 
+      // image container
+      var imgContainer = document.createElement("div");
+      imgContainer.classList.add("saved-item-image-container");
+
       // image
       var img = document.createElement("img");
       img.classList.add("saved-recipe-image");
       img.src = item.imgSrc;
+      imgContainer.appendChild(img);
 
       // text container
       const textContainer = document.createElement("div");
@@ -127,12 +110,10 @@ chrome.storage.sync.get(["jumptorecipe_saved"], function (result) {
       });
       
       // add all to item container
-      newItem.appendChild(img);
+      newItem.appendChild(imgContainer);
       newItem.appendChild(textContainer);
       newItem.appendChild(deleteButton);
       savedContainer.appendChild(newItem);
-
-      console.log(item);
     }
   }
   });

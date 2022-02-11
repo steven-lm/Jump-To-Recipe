@@ -187,8 +187,9 @@
 }
 
 #jump-to-recipe-top-image-container img {
-    object-fit: contain;
+    object-fit: cover;
     max-width:100%;
+    min-height: 220px;
 }
 
 #jump-to-recipe-close-button {

@@ -1,15 +1,9 @@
-// chrome.storage.sync.set({jumptorecipe_saved: []}, function() {
-//   console.log('Value is set to ' + value);
-// });
-
 const page_url = window.location.href;
-console.log("page url", page_url);
 
 var url = "https://onlyrecipe.herokuapp.com/?url=" + page_url;
 
 async function getData(url) {
   // Default options are marked with *
-  console.log("CALLING", url);
   const response = await fetch(url, {
     method: "GET",
     headers: {
@@ -24,7 +18,6 @@ async function getData(url) {
     })
     .catch((err) => console.log(err));
 
-  console.log("HERE", response);
   return response.json();
 }
 
@@ -110,27 +103,26 @@ getData(url)
       // Show modal
       const background = document.getElementById("jump-to-recipe-background");
       let container = document.getElementById("jump-to-recipe-container");
-    
+
       if (!container) {
         container = document.getElementById("jump-to-recipe-container-error");
       }
-    
+
       background.style.display = "block";
       container.style.display = "block";
-    
+
       // get close element
       var closeButton = document.getElementById("jump-to-recipe-close-button");
-    
+
       // close modal on click
-      closeButton.onclick = function() {
+      closeButton.onclick = function () {
         background.style.display = "none";
         container.style.display = "none";
-      }
-    
+      };
+
       // close modal when user clicks outside
-      window.addEventListener("click", function(event) {
+      window.addEventListener("click", function (event) {
         if (event.target == background) {
-          console.log("clicked outside");
           background.style.display = "none";
           container.style.display = "none";
         }
@@ -138,16 +130,12 @@ getData(url)
     }
   })
   .catch(() => {
-    console.log("errorrr");
     chrome.storage.local.get(["jumptorecipe_norecipe"], function (result) {
       let current = result.jumptorecipe_norecipe;
-      console.log("current norecipe", current);
       if (!current || current.length === 0) {
-        console.log("There are NO sites stored in norecipe");
         const newList = [page_url];
         chrome.storage.local.set({ jumptorecipe_norecipe: newList });
       } else {
-        console.log("There are sites stored in norecipe");
         current.push(page_url);
         chrome.storage.local.set({ jumptorecipe_norecipe: current });
       }

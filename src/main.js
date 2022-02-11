@@ -1,6 +1,4 @@
 function addToSaved(title, url, imgSrc, timeTaken) {
-    console.log("Saving Recipe!")
-
     chrome.storage.sync.get(['jumptorecipe_saved'], function(result) {
         let current = result.jumptorecipe_saved;
         const newItem = {
@@ -30,12 +28,10 @@ fetch(chrome.runtime.getURL('/popup.html')).then(r => r.text()).then(html => {
 
     const title = document.getElementById('jump-to-recipe-top-title')
     saveContainer.onclick = function() {
-        console.log("SHARED BUTTON AJSLF")
         saveButton.id = "jump-to-recipe-save-button-saved";
         saveButton.textContent = "Saved!";
         const imgSrc = document.getElementById('jump-to-recipe-top-image').src;
         const timeTaken = document.getElementById('jump-to-recipe-time');
-        console.log(timeTaken)
         addToSaved(title.textContent, page_url, imgSrc, timeTaken.textContent);
         saveContainer.onclick = null;
     }
@@ -51,7 +47,6 @@ fetch(chrome.runtime.getURL('/popup.html')).then(r => r.text()).then(html => {
                 saveButton.id = "jump-to-recipe-save-button-saved";
                 saveContainer.onclick = null;
             }
-            console.log(item);
           }
         }
     });

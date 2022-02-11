@@ -1,11 +1,6 @@
 function addToSaved(title, url, imgSrc, timeTaken) {
-  console.log("Saving Recipe!")
-
   chrome.storage.sync.get(['jumptorecipe_saved'], function(result) {
-      console.log('Value currently is ' + result.jumptorecipe_saved);
       let current = result.jumptorecipe_saved;
-      console.log("current", current)
-
       const newItem = {
         title: title,
         url: url,
@@ -15,26 +10,19 @@ function addToSaved(title, url, imgSrc, timeTaken) {
 
       if (!current || current.length === 0) {
         const newList = [newItem]
-        chrome.storage.sync.set({'jumptorecipe_saved': newList}, function() {
-            console.log('Value is set to ' + value);
-        });
+        chrome.storage.sync.set({'jumptorecipe_saved': newList});
       } else {
-          console.log("current exists")
           current.push(newItem)
-          chrome.storage.sync.set({jumptorecipe_saved: current}, function() {
-              console.log('Value is set to ' + value);
-          });
+          chrome.storage.sync.set({jumptorecipe_saved: current});
       }
   });
 }
 
 // this code will be executed before page load
 (function () {
-    console.log("end.js executed");
     const page_url = window.location.href;
 
-    chrome.runtime.onMessage.addListener(function(message, sender) {
-      console.log("hey")
+    chrome.runtime.onMessage.addListener(function(message) {
       if (message.command == "openModal") {
         const background = document.getElementById("jump-to-recipe-background");
         let container = document.getElementById("jump-to-recipe-container");
@@ -58,13 +46,11 @@ function addToSaved(title, url, imgSrc, timeTaken) {
         // close modal when user clicks outside
         window.addEventListener("click", function(event) {
           if (event.target == background) {
-            console.log("clicked outside");
             background.style.display = "none";
             container.style.display = "none";
           }
         });
       } else if (message.command == "savedItemRemoved") {
-        console.log("savedItemRemoved")
         if (message.url === page_url) {
           const saveContainer = document.getElementById("jump-to-recipe-saved-container");
           const saveButton = document.getElementById("jump-to-recipe-save-button-saved");      
@@ -77,7 +63,6 @@ function addToSaved(title, url, imgSrc, timeTaken) {
           saveButton.id = "jump-to-recipe-save-button";
       
           saveContainer.onclick = function() {
-              console.log("SAVED AGAGAN AJSLF")
               saveButton.id = "jump-to-recipe-save-button-saved";
               saveButton.textContent = "Saved!";
               addToSaved(title.textContent, page_url, imgSrc, timeTaken.textContent);

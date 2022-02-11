@@ -1,7 +1,7 @@
 {
   "name": "Jump To Recipe",
-  "description": "Extracts only the recipe from any recipe page, without any life stories or clutter.",
-  "homepage_url": "https://github.com/llagerlof/fresh-chrome-extension",
+  "description": "Extracts only the recipe from any website or blog page, without any life stories or clutter.",
+  "homepage_url": "https://github.com/steven-lm/Jump-To-Recipe",
   "version": "1.0.0",
   "manifest_version": 3,
   "action": {
