@@ -18,7 +18,6 @@ function addToSaved(title, url, imgSrc, timeTaken) {
   });
 }
 
-// this code will be executed before page load
 (function () {
     const page_url = window.location.href;
 
@@ -34,10 +33,8 @@ function addToSaved(title, url, imgSrc, timeTaken) {
         background.style.display = "block";
         container.style.display = "block";
       
-        // get close element
         var closeButton = document.getElementById("jump-to-recipe-close-button");
       
-        // close modal on click
         closeButton.onclick = function() {
           background.style.display = "none";
           container.style.display = "none";

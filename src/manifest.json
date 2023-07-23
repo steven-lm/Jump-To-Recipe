@@ -45,8 +45,9 @@
   ],
   "host_permissions": [
     "https://*/*",
-    "http://*/*",
-    "https://onlyrecipe.herokuapp.com/*"
+    "http://*/*"
+    // "https://onlyrecipe.herokuapp.com/*",
+    // "https://7y1y0em01g.execute-api.us-west-1.amazonaws.com/*"
   ],
   "icons": { "16": "/icons/icon16.png", "48": "/icons/icon128.png", "128": "/icons/icon128.png" },
   "web_accessible_resources": [

@@ -1,17 +1,11 @@
 
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  var activeTab = tabs[0];
   chrome.storage.local.get(["jumptorecipe_norecipe"], function (result) {
-    let norecipe_urls = result.jumptorecipe_norecipe;
+    let hasNoRecipe = result.jumptorecipe_norecipe;
 
-    if (norecipe_urls && norecipe_urls.length > 0) {
+    if (hasNoRecipe === true) {
+      document.getElementById("no-recipe").classList.remove("hidden");
 
-      for (const url of norecipe_urls) {
-        if (url === activeTab.url) {
-          document.getElementById("no-recipe").classList.remove("hidden");
-    
-        }
-      }
     }
   });
 });
@@ -65,35 +59,29 @@ chrome.storage.sync.get(["jumptorecipe_saved"], function (result) {
         window.open(item.url);
       }
 
-      // image container
       var imgContainer = document.createElement("div");
       imgContainer.classList.add("saved-item-image-container");
 
-      // image
       var img = document.createElement("img");
       img.classList.add("saved-recipe-image");
       img.src = item.imgSrc;
       imgContainer.appendChild(img);
 
-      // text container
       const textContainer = document.createElement("div");
       textContainer.classList.add("saved-item-text-container");
 
-      // ---- title
       const title = document.createElement("span");
       title.textContent = item.title;
       title.target = "_blank";
       title.classList.add("saved-item-text-title");
       textContainer.appendChild(title);
-      // ---- time
+
       const timeText = document.createTextNode("Total time: " + item.time);
       const time = document.createElement("span");
       time.appendChild(timeText);
       time.classList.add("saved-item-text-time");
       textContainer.appendChild(time);
       
-
-      // delete button
       const deleteButton = document.createElement("div");
       deleteButton.classList.add("saved-item-delete");
 
@@ -109,7 +97,7 @@ chrome.storage.sync.get(["jumptorecipe_saved"], function (result) {
         deleteSavedItem(item.title, item.url, newItem);
       });
       
-      // add all to item container
+      // add all to items container
       newItem.appendChild(imgContainer);
       newItem.appendChild(textContainer);
       newItem.appendChild(deleteButton);

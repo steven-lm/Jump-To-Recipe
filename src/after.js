@@ -1,143 +1,155 @@
 const page_url = window.location.href;
 
-var url = "https://onlyrecipe.herokuapp.com/?url=" + page_url;
+var url = process.env.AWS_SERVERLESS_ENDPOINT + page_url;
 
 async function getData(url) {
-  // Default options are marked with *
   const response = await fetch(url, {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "$zS(`G=a9?8i&mC(OCs^kp[CzFjLe`",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": true,
-    },
-  })
-    .then((response) => {
-      return response;
-    })
-    .catch((err) => console.log(err));
+  });
+  return await response.json();
+}
+const scripts = document.querySelectorAll('script[type="application/ld+json"]');
 
-  return response.json();
+const hasRecipe = Array.from(scripts).some(script => {
+  try {
+    const json = JSON.parse(script.innerText);
+    return hasRecipeSchema(json)
+  } catch (e) {
+    return false;
+  }
+});
+
+// Recursively check if page has a recipe schema
+// some websites store recipe data in a complex structure 
+function hasRecipeSchema(json) {
+  if (Array.isArray(json)) {
+    for (let element of json) {
+      if (hasRecipeSchema(element)) {
+        return true;
+      }
+    }
+    return false;
+  } else if (typeof json === 'object') {
+    for (let key in json) {
+      if (json[key] === "Recipe" || hasRecipeSchema(json[key])) {
+        return true;
+      }
+    }
+    return false;
+  } else {
+    return false;
+  }
 }
 
-getData(url)
-  .then((data) => {
-    // Title
-    const title = document.getElementById("jump-to-recipe-top-title");
-    title.textContent = data.title;
+function updateUI(data) {
+  const title = document.getElementById("jump-to-recipe-top-title");
+  title.textContent = data.title;
 
-    // Time
-    const time = document.getElementById("jump-to-recipe-time");
+  const time = document.getElementById("jump-to-recipe-time");
 
-    let hourLabel = "hours";
-    let minLabel = "minutes";
+  let hourLabel = "hours";
+  let minLabel = "minutes";
 
-    if (data.total_time.hours == 1) hourLabel = "hour";
-    if (data.total_time.minutes == 1) minLabel = "minute";
+  if (data.total_time.hours == 1) hourLabel = "hour";
+  if (data.total_time.minutes == 1) minLabel = "minute";
 
-    if (data.total_time.hours > 0 && data.total_time.minutes > 0) {
-      time.textContent =
-        data.total_time.hours +
-        " " +
-        hourLabel +
-        "  " +
-        Math.round(data.total_time.minutes) +
-        " " +
-        minLabel;
-    } else if (data.total_time.hours > 0 && data.total_time.minutes == 0) {
-      time.textContent = data.total_time.hours + " " + hourLabel;
-    } else if (data.total_time.minutes > 0) {
-      time.textContent = Math.round(data.total_time.minutes) + " " + minLabel;
-    }
+  if (data.total_time.hours > 0 && data.total_time.minutes > 0) {
+    time.textContent =
+      data.total_time.hours +
+      " " +
+      hourLabel +
+      "  " +
+      Math.round(data.total_time.minutes) +
+      " " +
+      minLabel;
+  } else if (data.total_time.hours > 0 && data.total_time.minutes == 0) {
+    time.textContent = data.total_time.hours + " " + hourLabel;
+  } else if (data.total_time.minutes > 0) {
+    time.textContent = Math.round(data.total_time.minutes) + " " + minLabel;
+  }
 
-    // Servings
-    const servings = document.getElementById("jump-to-recipe-servings");
-    if (data.yields == "0 serving(s)") data.yields = "-- serving(s)"; // if no servings, show --
-    servings.textContent = data.yields;
+  const servings = document.getElementById("jump-to-recipe-servings");
+  if (data.yields == "0 serving(s)") data.yields = "-- serving(s)"; // if no servings, show --
+  servings.textContent = data.yields;
 
-    const image = document.getElementById("jump-to-recipe-top-image");
-    image.src = data.image;
+  const image = document.getElementById("jump-to-recipe-top-image");
+  image.src = data.image;
 
-    // Ingredients
-    const ingredientsContainer = document.getElementById(
-      "jump-to-recipe-bottom-ingredients-content"
-    );
+  const ingredientsContainer = document.getElementById(
+    "jump-to-recipe-bottom-ingredients-content"
+  );
 
-    for (let i = 0; i < data.ingredients.length - 1; i++) {
-      const ingredient = document.createElement("div");
-      ingredient.className = "jump-to-recipe-ingredient-item-underlined";
-      ingredient.textContent = data.ingredients[i];
-      ingredientsContainer.appendChild(ingredient);
-    }
-
+  for (let i = 0; i < data.ingredients.length - 1; i++) {
     const ingredient = document.createElement("div");
-    ingredient.className = "jump-to-recipe-ingredient-item";
-    ingredient.textContent = data.ingredients[data.ingredients.length - 1];
+    ingredient.className = "jump-to-recipe-ingredient-item-underlined";
+    ingredient.textContent = data.ingredients[i];
     ingredientsContainer.appendChild(ingredient);
+  }
 
-    // Directions
-    const directionsContainer = document.getElementById(
-      "jump-to-recipe-bottom-instructions-content"
-    );
-    for (let i = 0; i < data.instructions.length; i++) {
-      // container
-      const step = document.createElement("div");
-      step.className = "jump-to-recipe-instructions-container";
+  const ingredient = document.createElement("div");
+  ingredient.className = "jump-to-recipe-ingredient-item";
+  ingredient.textContent = data.ingredients[data.ingredients.length - 1];
+  ingredientsContainer.appendChild(ingredient);
 
-      // instructions
-      const instr = document.createElement("div");
-      instr.className = "jump-to-recipe-instructions-item";
-      instr.textContent = data.instructions[i];
+  const directionsContainer = document.getElementById(
+    "jump-to-recipe-bottom-instructions-content"
+  );
+  for (let i = 0; i < data.instructions.length; i++) {
+    // container
+    const step = document.createElement("div");
+    step.className = "jump-to-recipe-instructions-container";
 
-      // number
-      const num = document.createElement("span");
-      num.className = "jump-to-recipe-instructions-number";
-      num.innerHTML = i + 1;
+    // instructions
+    const instr = document.createElement("div");
+    instr.className = "jump-to-recipe-instructions-item";
+    instr.textContent = data.instructions[i];
 
-      step.appendChild(num);
-      step.appendChild(instr);
+    const num = document.createElement("span");
+    num.className = "jump-to-recipe-instructions-number";
+    num.innerHTML = i + 1;
 
-      directionsContainer.appendChild(step);
+    step.appendChild(num);
+    step.appendChild(instr);
 
-      // Show modal
-      const background = document.getElementById("jump-to-recipe-background");
-      let container = document.getElementById("jump-to-recipe-container");
+    directionsContainer.appendChild(step);
 
-      if (!container) {
-        container = document.getElementById("jump-to-recipe-container-error");
-      }
+    // Show modal
+    const background = document.getElementById("jump-to-recipe-background");
+    let container = document.getElementById("jump-to-recipe-container");
 
-      background.style.display = "block";
-      container.style.display = "block";
+    if (!container) {
+      container = document.getElementById("jump-to-recipe-container-error");
+    }
 
-      // get close element
-      var closeButton = document.getElementById("jump-to-recipe-close-button");
+    background.style.display = "block";
+    container.style.display = "block";
 
-      // close modal on click
-      closeButton.onclick = function () {
+    var closeButton = document.getElementById("jump-to-recipe-close-button");
+
+    closeButton.onclick = function () {
+      background.style.display = "none";
+      container.style.display = "none";
+    };
+
+    // close modal when user clicks outside
+    window.addEventListener("click", function (event) {
+      if (event.target == background) {
         background.style.display = "none";
         container.style.display = "none";
-      };
-
-      // close modal when user clicks outside
-      window.addEventListener("click", function (event) {
-        if (event.target == background) {
-          background.style.display = "none";
-          container.style.display = "none";
-        }
-      });
-    }
-  })
-  .catch(() => {
-    chrome.storage.local.get(["jumptorecipe_norecipe"], function (result) {
-      let current = result.jumptorecipe_norecipe;
-      if (!current || current.length === 0) {
-        const newList = [page_url];
-        chrome.storage.local.set({ jumptorecipe_norecipe: newList });
-      } else {
-        current.push(page_url);
-        chrome.storage.local.set({ jumptorecipe_norecipe: current });
       }
     });
-  });
+  }
+}
+
+if (hasRecipe) {
+  chrome.storage.local.set({ jumptorecipe_norecipe: false });
+  getData(url)
+    .then((data) => {
+      updateUI(data)
+    })
+    .catch(() => {
+      chrome.storage.local.set({ jumptorecipe_norecipe: true });
+    });
+} else {
+  chrome.storage.local.set({ jumptorecipe_norecipe: true });
+}

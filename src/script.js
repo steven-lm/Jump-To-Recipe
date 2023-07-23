@@ -1,12 +1,8 @@
-// get modal elements
 var modalBackground = document.getElementById("only-recipe-background");
 var modalBox = document.getElementById("only-recipe-container");
 
-
-// get close element
 var closeButton = document.getElementById("only-recipe-close-button");
 
-// close modal on click
 closeButton.onclick = function() {
   modalBackground.style.display = "none";
   modalBox.style.display = "none";
