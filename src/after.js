@@ -1,13 +1,25 @@
 const page_url = window.location.href;
 
-var url = process.env.AWS_SERVERLESS_ENDPOINT + page_url;
+var url = "https://onlyrecipe.herokuapp.com/?url=" + page_url;
 
 async function getData(url) {
+  // Default options are marked with *
   const response = await fetch(url, {
     method: "GET",
-  });
-  return await response.json();
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "$zS(`G=a9?8i&mC(OCs^kp[CzFjLe`",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": true,
+    },
+  })
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => console.log(err));
+  return response.json();
 }
+
 const scripts = document.querySelectorAll('script[type="application/ld+json"]');
 
 const hasRecipe = Array.from(scripts).some(script => {
