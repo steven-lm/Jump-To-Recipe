@@ -1,6 +1,6 @@
 const page_url = window.location.href;
 
-var url = "https://onlyrecipe.herokuapp.com/?url=" + page_url;
+var url = "https://jump-to-recipe-flask.onrender.com/?url=" + page_url;
 
 async function getData(url) {
   // Default options are marked with *
