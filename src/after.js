@@ -1,38 +1,44 @@
 const page_url = window.location.href;
 
-var url = "https://onlyrecipe.herokuapp.com/?url=" + page_url;
+var url = "https://jump-to-recipe-flask.onrender.com/?url=" + page_url;
 
 async function getData(url) {
-  // Default options are marked with *
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "$zS(`G=a9?8i&mC(OCs^kp[CzFjLe`",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": true,
-    },
-  })
-    .then((response) => {
-      return response;
-    })
-    .catch((err) => console.log(err));
-  return response.json();
-}
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "$zS(`G=a9?8i&mC(OCs^kp[CzFjLe`",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
+      },
+    });
 
+    console.log("JUMP-TO-RECIPE: ", response);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return response.json();
+  } catch (err) {
+    console.error(err);
+    return { error: "An error occurred" };
+  }
+}
 const scripts = document.querySelectorAll('script[type="application/ld+json"]');
 
-const hasRecipe = Array.from(scripts).some(script => {
+const hasRecipe = Array.from(scripts).some((script) => {
   try {
     const json = JSON.parse(script.innerText);
-    return hasRecipeSchema(json)
+    return hasRecipeSchema(json);
   } catch (e) {
     return false;
   }
 });
 
 // Recursively check if page has a recipe schema
-// some websites store recipe data in a complex structure 
+// some websites store recipe data in a complex structure
 function hasRecipeSchema(json) {
   if (Array.isArray(json)) {
     for (let element of json) {
@@ -41,7 +47,7 @@ function hasRecipeSchema(json) {
       }
     }
     return false;
-  } else if (typeof json === 'object') {
+  } else if (typeof json === "object") {
     for (let key in json) {
       if (json[key] === "Recipe" || hasRecipeSchema(json[key])) {
         return true;
@@ -157,7 +163,7 @@ if (hasRecipe) {
   chrome.storage.local.set({ jumptorecipe_norecipe: false });
   getData(url)
     .then((data) => {
-      updateUI(data)
+      updateUI(data);
     })
     .catch(() => {
       chrome.storage.local.set({ jumptorecipe_norecipe: true });

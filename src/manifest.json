@@ -2,7 +2,7 @@
   "name": "Jump To Recipe",
   "description": "Extracts only the recipe from any website or blog page, without any life stories or clutter.",
   "homepage_url": "https://github.com/steven-lm/Jump-To-Recipe",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "manifest_version": 3,
   "action": {
     "default_title": "Jump To Recipe",
@@ -10,54 +10,36 @@
   },
   "content_scripts": [
     {
-      "run_at" : "document_end",
+      "run_at": "document_end",
       "js": ["end.js"],
-      "matches": [
-        "https://*/*",
-        "http://*/*"
-      ]
+      "matches": ["https://*/*", "http://*/*"]
     },
     {
-      "run_at" : "document_idle",
+      "run_at": "document_idle",
       "js": ["after.js"],
-      "matches": [
-        "https://*/*",
-        "http://*/*"
-      ]
+      "matches": ["https://*/*", "http://*/*"]
     },
     {
-      "matches": [
-        "http://*/*", "https://*/*"
-      ],
+      "matches": ["http://*/*", "https://*/*"],
       "css": ["styles.css"],
-      "js": ["thirdParty/jquery-3.6.0.min.js","main.js"],
+      "js": ["thirdParty/jquery-3.6.0.min.js", "main.js"],
       "html": ["popup.html"]
     }
   ],
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": [
-    "tabs",
-    "scripting",
-    "activeTab",
-    "storage"
-  ],
-  "host_permissions": [
-    "https://*/*",
-    "http://*/*"
-    // "https://onlyrecipe.herokuapp.com/*",
-    // "https://7y1y0em01g.execute-api.us-west-1.amazonaws.com/*"
-  ],
-  "icons": { "16": "/icons/icon16.png", "48": "/icons/icon128.png", "128": "/icons/icon128.png" },
+  "permissions": ["tabs", "scripting", "activeTab", "storage"],
+  "host_permissions": ["https://*/*", "http://*/*"],
+  "icons": {
+    "16": "/icons/icon16.png",
+    "48": "/icons/icon128.png",
+    "128": "/icons/icon128.png"
+  },
   "web_accessible_resources": [
     {
-      "matches": [
-        "http://*/*", "https://*/*"
-      ],
-      "resources": [
-        "popup.html"
-      ]
+      "matches": ["http://*/*", "https://*/*"],
+      "resources": ["popup.html"]
     }
   ]
 }
