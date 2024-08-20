@@ -2,7 +2,7 @@
   "name": "Jump To Recipe",
   "description": "Extracts only the recipe from any website or blog page, without any life stories or clutter.",
   "homepage_url": "https://github.com/steven-lm/Jump-To-Recipe",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "manifest_version": 3,
   "action": {
     "default_title": "Jump To Recipe",
